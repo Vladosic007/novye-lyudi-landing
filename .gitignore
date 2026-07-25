@@ -1,0 +1,15 @@
+# Зависимости
+node_modules/
+
+# Секреты и окружение
+.env
+.env.local
+.env.*.local
+
+# Vercel
+.vercel
+
+# Системное
+.DS_Store
+Thumbs.db
+*.log

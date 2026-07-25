@@ -1,0 +1,10 @@
+{
+  "name": "novye-lyudi-landing",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Лендинг «Новые люди» — против блокировок интернета",
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "vercel dev"
+  }
+}

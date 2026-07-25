@@ -1,0 +1,399 @@
+<!--
+  ═══════════════════════════════════════════════════════════════════════════
+  Новые люди — лендинг «Против блокировок интернета»
+  ───────────────────────────────────────────────────────────────────────────
+  КАК ПРАВИТЬ ТЕКСТ: ищи метки  ✏️ ТЕКСТ  — меняй только то, что между тегами,
+  сами теги (<h1>, <p> и т.д.) не трогай. Подробнее — в файле КАК-РЕДАКТИРОВАТЬ.md
+  ═══════════════════════════════════════════════════════════════════════════
+-->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#18CFC5" />
+
+<!-- ✏️ ТЕКСТ: заголовок вкладки и описание для поисковиков/соцсетей -->
+<title>Новые люди — за свободный интернет без блокировок</title>
+<meta name="description" content="Инициатива партии «Новые люди» против блокировок интернета. Оставьте подпись и поддержите свободный доступ к информации." />
+
+<!-- Превью при отправке ссылки в Telegram / VK -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Новые люди — за свободный интернет" />
+<meta property="og:description" content="Против блокировок интернета. Присоединяйтесь к инициативе." />
+<meta property="og:image" content="assets/img/logo-nl.png" />
+<link rel="icon" href="assets/img/logo-nl.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="assets/css/styles.css" />
+
+
+<!-- ═══════════════════ ШАПКА / МЕНЮ ═══════════════════ -->
+<header class="nav-wrap" id="top">
+  <div class="container">
+    <nav class="nav" aria-label="Главное меню">
+      <a class="brand" href="#top" aria-label="Новые люди — на главную">
+        <img class="brand__logo" src="assets/img/logo-nl.png" alt="Партия «Новые люди»" />
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <!-- ✏️ ТЕКСТ: пункты меню (href должен совпадать с id секции ниже) -->
+        <li><a href="#manifest">Позиция</a></li>
+        <li><a href="#o-partii">О партии</a></li>
+        <li><a href="#komanda">Команда</a></li>
+        <li><a href="#zayavka">Подпись</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#zayavka" class="btn btn--primary">Оставить подпись</a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav-links">
+          <svg class="ic-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <svg class="ic-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+
+<main>
+  <!-- ═══════════════════ HERO + ВИДЕО ═══════════════════ -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero__inner">
+        <span class="eyebrow" data-reveal>Инициатива партии «Новые люди»</span>
+        <!-- ✏️ ТЕКСТ: главный заголовок -->
+        <h1 data-reveal data-reveal-delay="1">Против блокировок <span class="hl">интернета</span></h1>
+        <!-- ✏️ ТЕКСТ: подзаголовок -->
+        <p class="lead" data-reveal data-reveal-delay="2">
+          Мы собираем обращения граждан, чтобы защитить свободный доступ к информации.
+          Оставьте подпись — и станьте частью инициативы за открытый интернет.
+        </p>
+        <div class="hero__cta" data-reveal data-reveal-delay="3">
+          <a href="#zayavka" class="btn btn--primary btn--lg">Оставить подпись</a>
+          <a href="#o-partii" class="btn btn--ghost btn--lg">Узнать о партии</a>
+        </div>
+      </div>
+
+      <!-- ВИДЕО. Когда будет файл — положи его в assets/video/hero.mp4 и постер в
+           assets/img/hero-poster.jpg, затем раскомментируй блок <video> и удали
+           блок <div class="video-placeholder"> -->
+      <div class="video-wrap" data-reveal data-reveal-delay="2">
+        <div class="video-glow"></div>
+        <div class="video-frame" id="video-frame">
+
+          <!-- ↓↓↓ РЕАЛЬНОЕ ВИДЕО (пока закомментировано) ↓↓↓
+          <video controls playsinline preload="none" poster="assets/img/hero-poster.jpg">
+            <source src="assets/video/hero.mp4" type="video/mp4" />
+            Ваш браузер не поддерживает видео.
+          </video>
+          ↑↑↑ -->
+
+          <!-- Заглушка (удали, когда добавишь видео) -->
+          <div class="video-placeholder">
+            <span class="play">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+            <span>Здесь будет видео — добавим файл&nbsp;hero.mp4</span>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="scroll-cue" data-reveal>
+        <span>Листайте вниз</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════ МАНИФЕСТ (текст после видео) ═══════════════════ -->
+  <section class="section manifest" id="manifest">
+    <div class="container">
+      <!-- ✏️ ТЕКСТ: главный посыл -->
+      <p class="manifest__lead" data-reveal>
+        Блокировки бьют не по «врагам», а по обычным людям — по бизнесу, учёбе,
+        врачам и семьям, которые просто хотят <span class="marker">оставаться на связи</span>.
+      </p>
+      <p class="manifest__text" data-reveal data-reveal-delay="1">
+        Свободный интернет — это рабочие места, образование, доступ к знаниям и
+        возможность быть услышанным. Мы выступаем за прозрачные правила вместо
+        тотальных запретов и хотим, чтобы голос граждан был услышан.
+      </p>
+
+      <!-- ✏️ ЦИТАТА ДАВАНКОВА.
+           ⚠️ ВАЖНО: ниже — черновик по мотивам манифеста партии. Впиши ТОЧНУЮ
+           цитату Владислава Даванкова (его реальные слова).
+           Фото: положи файл assets/img/davankov.jpg и замени «ВД» на строку
+           <img src="assets/img/davankov.jpg" alt="Владислав Даванков" /> -->
+      <figure class="quote" data-reveal data-reveal-delay="2">
+        <span class="quote__mark" aria-hidden="true">“</span>
+        <blockquote>
+          <p>Нельзя лишать людей привычных сервисов из-за запретов. Ограничение доступа к любому сайту — только по решению суда, а не по звонку.</p>
+        </blockquote>
+        <figcaption class="quote__author">
+          <span class="quote__photo">ВД</span>
+          <span>
+            <b>Владислав Даванков</b>
+            <small>Вице-спикер Госдумы, партия «Новые люди»</small>
+          </span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════ О ПАРТИИ ═══════════════════ -->
+  <section class="section o-partii" id="o-partii" style="background:var(--surface-2)">
+    <div class="container">
+      <div class="party">
+        <div class="party__text" data-reveal>
+          <span class="eyebrow">О партии</span>
+          <!-- ✏️ ТЕКСТ: заголовок и описание партии -->
+          <h2>Кто такие<br>«Новые люди»</h2>
+          <p>
+            «Новые люди» — российская партия, основанная в 2020 году. С 2021 года
+            представлена в Государственной Думе. Выступает за свободу, частную
+            инициативу и здравый смысл — и против запретов там, где можно договориться.
+          </p>
+          <p>
+            Одна из ключевых тем партии — свободный интернет: пересмотр блокировок
+            и защита цифровых прав граждан.
+          </p>
+          <a href="#zayavka" class="btn btn--primary">Поддержать инициативу</a>
+        </div>
+
+        <!-- ✏️ ТЕКСТ: тезисы (можно менять заголовки и описания) -->
+        <div class="party__theses">
+          <div class="thesis" data-reveal data-reveal-delay="1">
+            <span class="thesis__ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </span>
+            <div><h3>Свобода информации</h3><p>Доступ к знаниям и сервисам без необоснованных запретов.</p></div>
+          </div>
+          <div class="thesis" data-reveal data-reveal-delay="2">
+            <span class="thesis__ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+            </span>
+            <div><h3>Поддержка IT и бизнеса</h3><p>Условия для роста технологий, а не барьеры и отток специалистов.</p></div>
+          </div>
+          <div class="thesis" data-reveal data-reveal-delay="3">
+            <span class="thesis__ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+            </span>
+            <div><h3>Защита прав граждан</h3><p>Прозрачные правила и ответственность вместо тотальных блокировок.</p></div>
+          </div>
+          <div class="thesis" data-reveal data-reveal-delay="4">
+            <span class="thesis__ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="m3 7 9-4 9 4"/><path d="M3 7v10l9 4 9-4V7"/></svg>
+            </span>
+            <div><h3>Современное государство</h3><p>Технологии на службе людей, а не инструмент запретов.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✏️ ИЗВЕСТНЫЕ ИНИЦИАТИВЫ. Данные собраны из открытых источников (программный
+           манифест партии, СМИ) — сверься и при необходимости поправь формулировки. -->
+      <div class="initiatives" data-reveal>
+        <h3 class="initiatives__title">Известные инициативы партии</h3>
+        <div class="init-grid">
+          <div class="init"><span class="init__tag">Интернет</span><p>Пересмотр всех интернет-блокировок последних пяти лет.</p></div>
+          <div class="init"><span class="init__tag">Интернет</span><p>Доступ к сайтам ограничивать только по решению суда.</p></div>
+          <div class="init"><span class="init__tag">Связь</span><p>Бесплатный Wi-Fi в регионах с проблемами связи.</p></div>
+          <div class="init"><span class="init__tag">Бизнес</span><p>Отсрочка от армии для молодых предпринимателей.</p></div>
+          <div class="init"><span class="init__tag">Молодёжь</span><p>«Первое рабочее место» для студентов.</p></div>
+          <div class="init"><span class="init__tag">Люди</span><p>«Шашлычная амнистия» — готовить на своих участках без штрафов.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════ КОМАНДА ═══════════════════ -->
+  <section class="section komanda" id="komanda">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Команда</span>
+        <!-- ✏️ ТЕКСТ: заголовок и подзаголовок секции -->
+        <h2>Люди, которые ведут инициативу</h2>
+        <p>Пришлите фото и пару предложений о каждом — я подставлю их в карточки.</p>
+      </div>
+
+      <!-- ✏️ КОМАНДА: чтобы добавить человека — скопируй один блок <article class="member">…</article>.
+           Чтобы вставить фото: замени <svg>…</svg> внутри .member__photo на
+           <img src="assets/img/team/имя.jpg" alt="Имя Фамилия" /> -->
+      <div class="team-grid">
+        <article class="member" data-reveal data-reveal-delay="1">
+          <div class="member__photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0" stroke-linecap="round"/></svg>
+          </div>
+          <div class="member__body">
+            <h3>Имя Фамилия</h3>
+            <div class="member__role">Роль в команде</div>
+            <p>Короткое описание: чем занимается и почему в проекте.</p>
+          </div>
+        </article>
+
+        <article class="member" data-reveal data-reveal-delay="2">
+          <div class="member__photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0" stroke-linecap="round"/></svg>
+          </div>
+          <div class="member__body">
+            <h3>Имя Фамилия</h3>
+            <div class="member__role">Роль в команде</div>
+            <p>Короткое описание: чем занимается и почему в проекте.</p>
+          </div>
+        </article>
+
+        <article class="member" data-reveal data-reveal-delay="3">
+          <div class="member__photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0" stroke-linecap="round"/></svg>
+          </div>
+          <div class="member__body">
+            <h3>Имя Фамилия</h3>
+            <div class="member__role">Роль в команде</div>
+            <p>Короткое описание: чем занимается и почему в проекте.</p>
+          </div>
+        </article>
+
+        <article class="member" data-reveal data-reveal-delay="4">
+          <div class="member__photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0" stroke-linecap="round"/></svg>
+          </div>
+          <div class="member__body">
+            <h3>Имя Фамилия</h3>
+            <div class="member__role">Роль в команде</div>
+            <p>Короткое описание: чем занимается и почему в проекте.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════ ФОРМА ЗАЯВКИ ═══════════════════ -->
+  <section class="section apply" id="zayavka">
+    <div class="container">
+      <div class="apply-grid">
+        <div class="apply__aside" data-reveal>
+          <span class="eyebrow">Подпись</span>
+          <!-- ✏️ ТЕКСТ: заголовок и текст рядом с формой -->
+          <h2>Поддержите свободный интернет</h2>
+          <p>Оставьте контакты — мы свяжемся и расскажем, как принять участие в инициативе.</p>
+          <ul class="apply__points">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Свяжемся и подскажем, как помочь
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Ваши данные под защитой (152-ФЗ)
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Никакого спама — только по делу
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-card" data-reveal data-reveal-delay="1">
+          <form id="apply-form" action="/api/submit" method="post" novalidate>
+            <!-- honeypot против спам-ботов (не трогать) -->
+            <div class="hp" aria-hidden="true"><label>Не заполняйте<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+
+            <div class="field">
+              <label for="name">Имя <span class="req">*</span></label>
+              <input class="input" type="text" id="name" name="name" placeholder="Как к вам обращаться" autocomplete="name" />
+              <div class="err-msg">Пожалуйста, укажите имя</div>
+            </div>
+
+            <div class="field">
+              <label for="phone">Телефон <span class="req">*</span></label>
+              <input class="input" type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel" inputmode="tel" />
+              <div class="err-msg">Введите корректный номер телефона</div>
+            </div>
+
+            <div class="field">
+              <label for="comment">Комментарий</label>
+              <textarea class="textarea" id="comment" name="comment" placeholder="Ваше сообщение (необязательно)"></textarea>
+            </div>
+
+            <div class="field">
+              <label class="checkbox">
+                <input type="checkbox" name="consent" id="consent" />
+                <!-- ✏️ ТЕКСТ: согласие на обработку данных -->
+                <span>Я согласен(на) на обработку персональных данных в соответствии с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a>.</span>
+              </label>
+              <div class="err-msg" id="consent-err">Нужно согласие на обработку данных</div>
+            </div>
+
+            <div class="err-msg" id="form-global-err" style="margin-bottom:14px">Не удалось отправить. Попробуйте ещё раз или напишите нам напрямую.</div>
+
+            <button type="submit" class="btn btn--primary btn--lg btn--block" id="submit-btn">Отправить подпись</button>
+          </form>
+
+          <!-- Экран «Спасибо» -->
+          <div class="form-success" id="form-success">
+            <span class="ok">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <h3>Спасибо, заявка принята!</h3>
+            <p>Мы свяжемся с вами в ближайшее время.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<!-- ═══════════════════ ПОДВАЛ ═══════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="assets/img/logo-nl.png" alt="Партия «Новые люди»" />
+        <!-- ✏️ ТЕКСТ: короткое описание в подвале -->
+        <p>Инициатива за свободный интернет без блокировок. Присоединяйтесь и поддержите открытый доступ к информации.</p>
+        <!-- ✏️ СОЦСЕТИ: подставь свои ссылки в href -->
+        <div class="socials">
+          <a href="#" aria-label="Telegram">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.6 20c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.2 13.4l-4.8-1.5c-1-.3-1-1 .2-1.5l18.7-7.2c.9-.3 1.6.2 1.4 1.1z"/></svg>
+          </a>
+          <a href="#" aria-label="ВКонтакте">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.2 17c-5.3 0-8.6-3.7-8.7-9.8h2.7c.1 4.5 2.1 6.4 3.6 6.8V7.2h2.5v3.8c1.5-.2 3-1.8 3.6-3.8h2.5c-.4 2.4-2 4-3.1 4.7 1.1.6 2.9 2 3.6 4.9h-2.8c-.5-1.8-1.9-3.1-3.5-3.4V17h-.9z"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.2-.4-4.7c-.2-.8-.9-1.5-1.7-1.7C19.4 5.2 12 5.2 12 5.2s-7.4 0-8.9.4c-.8.2-1.5.9-1.7 1.7C1 8.8 1 12 1 12s0 3.2.4 4.7c.2.8.9 1.5 1.7 1.7 1.5.4 8.9.4 8.9.4s7.4 0 8.9-.4c.8-.2 1.5-.9 1.7-1.7C23 15.2 23 12 23 12zM9.7 15.3V8.7l5.7 3.3-5.7 3.3z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer__links">
+        <h4>Разделы</h4>
+        <a href="#manifest">Позиция</a>
+        <a href="#o-partii">О партии</a>
+        <a href="#komanda">Команда</a>
+        <a href="#zayavka">Оставить заявку</a>
+      </div>
+
+      <div class="footer__contacts">
+        <h4>Контакты</h4>
+        <!-- ✏️ ТЕКСТ: почта и телефон -->
+        <p><a href="mailto:info@example.ru">info@example.ru</a></p>
+        <p><a href="tel:+70000000000">+7 (000) 000-00-00</a></p>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© <span id="year">2026</span> Партия «Новые люди». Материал подготовлен инициативной группой.</span>
+      <a href="privacy.html">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Липкая кнопка на мобильных -->
+<div class="mobile-cta">
+  <a href="#zayavka" class="btn btn--primary btn--block">Оставить заявку</a>
+</div>
+
+<script src="assets/js/main.js" defer></script>
