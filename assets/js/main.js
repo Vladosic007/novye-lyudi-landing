@@ -8,6 +8,13 @@
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
 
+  /* --- Реф-метка (?ref=КОД): сохраняем и прикрепляем к заявке --- */
+  try {
+    var _ref = new URLSearchParams(location.search).get('ref');
+    if (_ref) localStorage.setItem('nl_ref', _ref.slice(0, 40));
+  } catch (e) {}
+  function getRef() { try { return localStorage.getItem('nl_ref') || ''; } catch (e) { return ''; } }
+
   /* --- Тень навбара при скролле --- */
   var navWrap = $('.nav-wrap');
   function onScroll() { if (navWrap) navWrap.classList.toggle('scrolled', window.scrollY > 10); }
@@ -132,6 +139,7 @@
         comment: (form.comment ? form.comment.value.trim() : ''),
         consent: !!(consent && consent.checked),
         adult: !!(adult && adult.checked),
+        ref: getRef(),
         source: location.href
       };
 

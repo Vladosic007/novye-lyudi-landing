@@ -1,0 +1,189 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Админка — Новые люди</title>
+<link rel="icon" href="assets/img/logo-nl.png" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+<style>
+  .wrap{max-width:960px;margin:0 auto;padding:28px 20px 80px}
+  .wrap__head{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+  .wrap__head img{height:44px}
+  .wrap__head b{font-family:var(--font-head);font-size:18px}
+  .panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:24px;margin-bottom:22px}
+  .panel h2{font-size:20px;margin-bottom:16px}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .big{font-family:var(--font-head);font-weight:800;font-size:44px;color:var(--cta);line-height:1}
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+  th{font-family:var(--font-head);font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .tag{display:inline-block;background:var(--accent-soft);color:var(--cta);font-family:var(--font-head);font-weight:600;font-size:13px;padding:3px 10px;border-radius:var(--r-full)}
+  .link-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);flex-wrap:wrap}
+  .link-row .nm{min-width:210px;font-weight:600}
+  .link-row code{background:var(--surface-2);padding:5px 9px;border-radius:8px;font-size:13px;flex:1;min-width:220px;overflow:auto;white-space:nowrap}
+  .btn--sm{padding:8px 14px;font-size:14px}
+  .err{color:var(--bad);font-size:14px;margin-top:10px}
+  .scroll{overflow-x:auto}
+  #dash{display:none}
+</style>
+
+<div class="wrap">
+  <div class="wrap__head">
+    <img src="assets/img/logo-nl.png" alt="Новые люди" />
+    <b>Админка · подписи</b>
+  </div>
+
+  <!-- Вход -->
+  <div class="panel" id="login">
+    <h2>Вход</h2>
+    <div class="row">
+      <input class="input" id="pass" type="password" placeholder="Пароль" style="max-width:280px" />
+      <button class="btn btn--primary" id="login-btn">Войти</button>
+    </div>
+    <div class="err" id="login-err" style="display:none"></div>
+  </div>
+
+  <!-- Дашборд -->
+  <div id="dash">
+    <div class="panel">
+      <div class="row" style="justify-content:space-between">
+        <div>
+          <div class="muted" style="font-size:14px">Всего подписей</div>
+          <div class="big" id="total">0</div>
+        </div>
+        <button class="btn btn--ghost btn--sm" id="refresh">Обновить</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>По рефералам</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Реферал</th><th class="num">Подписей</th></tr></thead>
+          <tbody id="ref-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Реф-ссылки команды</h2>
+      <p class="muted" style="font-size:14px;margin-bottom:12px">Дай каждому его ссылку — переходы по ней засчитываются этому человеку.</p>
+      <div id="links"></div>
+      <div class="row" style="margin-top:16px">
+        <input class="input" id="custom" placeholder="свой код (латиницей)" style="max-width:220px" />
+        <button class="btn btn--soft btn--sm" id="gen">Сделать ссылку</button>
+        <code id="custom-out" style="display:none"></code>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="row" style="justify-content:space-between;margin-bottom:14px">
+        <h2 style="margin:0">Последние заявки</h2>
+        <button class="btn btn--ghost btn--sm" id="csv">Скачать CSV</button>
+      </div>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Дата</th><th>Имя</th><th>Телефон</th><th>Реф</th></tr></thead>
+          <tbody id="recent-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var TEAM = [
+    ['Владимир Кабицкий', 'kabitsky'], ['Алексей Шестериков', 'shesterikov'],
+    ['Евгений Лысаков', 'lysakov'], ['Рафаэль Авазов', 'avazov'],
+    ['Артем Михаелян', 'mikhaelyan'], ['Артем Сафронов', 'safronov'],
+    ['Дмитрий Демиденко', 'demidenko'], ['Владислав Каменский', 'kamensky'],
+    ['Антон Шенинг', 'sheyning']
+  ];
+  var $ = function (s) { return document.querySelector(s); };
+  var PW = '';
+  var lastRecent = [];
+
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function link(code) { return location.origin + '/?ref=' + encodeURIComponent(code); }
+
+  function load(pw) {
+    return fetch('/api/stats', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw })
+    }).then(function (r) {
+      if (r.status === 401) throw new Error('Неверный пароль');
+      if (!r.ok) throw new Error('Ошибка сервера (' + r.status + ')');
+      return r.json();
+    });
+  }
+
+  function render(data) {
+    $('#total').textContent = data.total;
+    $('#ref-body').innerHTML = data.byRef.map(function (x) {
+      return '<tr><td><span class="tag">' + esc(x.ref) + '</span></td><td class="num">' + x.count + '</td></tr>';
+    }).join('') || '<tr><td colspan="2" class="muted">Пока пусто</td></tr>';
+
+    lastRecent = data.recent || [];
+    $('#recent-body').innerHTML = lastRecent.map(function (r) {
+      var d = new Date(r.created_at).toLocaleString('ru-RU');
+      return '<tr><td>' + esc(d) + '</td><td>' + esc(r.name) + '</td><td>' + esc(r.phone) + '</td><td>' + esc(r.ref || '—') + '</td></tr>';
+    }).join('') || '<tr><td colspan="4" class="muted">Пока пусто</td></tr>';
+  }
+
+  function renderLinks() {
+    $('#links').innerHTML = TEAM.map(function (t) {
+      var l = link(t[1]);
+      return '<div class="link-row"><span class="nm">' + esc(t[0]) + '</span><code>' + esc(l) +
+        '</code><button class="btn btn--soft btn--sm copy" data-l="' + esc(l) + '">Копировать</button></div>';
+    }).join('');
+  }
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.copy');
+    if (b) {
+      navigator.clipboard.writeText(b.getAttribute('data-l'));
+      b.textContent = 'Скопировано';
+      setTimeout(function () { b.textContent = 'Копировать'; }, 1200);
+    }
+  });
+
+  function doLogin() {
+    var pw = $('#pass').value;
+    var err = $('#login-err');
+    err.style.display = 'none';
+    load(pw).then(function (data) {
+      PW = pw;
+      $('#login').style.display = 'none';
+      $('#dash').style.display = 'block';
+      renderLinks();
+      render(data);
+    }).catch(function (e) { err.textContent = e.message; err.style.display = 'block'; });
+  }
+
+  $('#login-btn').addEventListener('click', doLogin);
+  $('#pass').addEventListener('keydown', function (e) { if (e.key === 'Enter') doLogin(); });
+  $('#refresh').addEventListener('click', function () { load(PW).then(render); });
+
+  $('#gen').addEventListener('click', function () {
+    var code = $('#custom').value.trim();
+    if (!code) return;
+    var out = $('#custom-out');
+    out.textContent = link(code);
+    out.style.display = 'inline-block';
+  });
+
+  $('#csv').addEventListener('click', function () {
+    var head = 'Дата,Имя,Телефон,Реф,Комментарий\n';
+    var rows = lastRecent.map(function (r) {
+      return [new Date(r.created_at).toLocaleString('ru-RU'), r.name, r.phone, r.ref || '', (r.comment || '').replace(/\s+/g, ' ')]
+        .map(function (v) { return '"' + String(v).replace(/"/g, '""') + '"'; }).join(',');
+    }).join('\n');
+    var blob = new Blob(['﻿' + head + rows], { type: 'text/csv;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'signatures.csv';
+    a.click();
+  });
+})();
+</script>

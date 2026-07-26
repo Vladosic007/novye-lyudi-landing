@@ -120,15 +120,12 @@
         тотальных запретов и хотим, чтобы голос граждан был услышан.
       </p>
 
-      <!-- ✏️ ЦИТАТА ДАВАНКОВА.
-           ⚠️ ВАЖНО: ниже — черновик по мотивам манифеста партии. Впиши ТОЧНУЮ
-           цитату Владислава Даванкова (его реальные слова).
-           Фото: положи файл assets/img/davankov.jpg и замени «ВД» на строку
-           <img src="assets/img/davankov.jpg" alt="Владислав Даванков" /> -->
+      <!-- ✏️ ЦИТАТА ДАВАНКОВА. Фото: сохрани файл как assets/img/davankov.jpg —
+           оно подхватится само (пока файла нет — показываются инициалы «ВД»). -->
       <figure class="quote" data-reveal data-reveal-delay="2">
         <span class="quote__mark" aria-hidden="true">“</span>
         <blockquote>
-          <p>Нельзя лишать людей привычных сервисов из-за запретов. Ограничение доступа к любому сайту — только по решению суда, а не по звонку.</p>
+          <p>Слишком много запретов и блокировок. Начинали с LinkedIn — сопротивления не встретили — закончили отключением интернета.</p>
         </blockquote>
         <figcaption class="quote__author">
           <span class="quote__photo">
@@ -393,6 +390,15 @@
               <div class="err-msg" id="consent-err">Нужно согласие на обработку данных</div>
             </div>
 
+            <!-- ✏️ Подтверждение 18+ -->
+            <div class="field">
+              <label class="checkbox">
+                <input type="checkbox" name="adult" id="adult" />
+                <span>Мне есть 18 лет, и я осознанно оставляю подпись.</span>
+              </label>
+              <div class="err-msg" id="adult-err">Подтвердите, что вам есть 18 лет</div>
+            </div>
+
             <div class="err-msg" id="form-global-err" style="margin-bottom:14px">Не удалось отправить. Попробуйте ещё раз или напишите нам напрямую.</div>
 
             <button type="submit" class="btn btn--primary btn--lg btn--block" id="submit-btn">Отправить подпись</button>
@@ -423,7 +429,7 @@
         <p>Инициатива за свободный интернет без блокировок. Присоединяйтесь и поддержите открытый доступ к информации.</p>
         <!-- ✏️ СОЦСЕТИ: подставь свои ссылки в href -->
         <div class="socials">
-          <a href="https://vk.ru/new_tagan" aria-label="ВКонтакте">
+          <a href="https://vk.ru/new_tagan" target="_blank" rel="noopener" aria-label="ВКонтакте">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.2 17c-5.3 0-8.6-3.7-8.7-9.8h2.7c.1 4.5 2.1 6.4 3.6 6.8V7.2h2.5v3.8c1.5-.2 3-1.8 3.6-3.8h2.5c-.4 2.4-2 4-3.1 4.7 1.1.6 2.9 2 3.6 4.9h-2.8c-.5-1.8-1.9-3.1-3.5-3.4V17h-.9z"/></svg>
           </a>
         </div>

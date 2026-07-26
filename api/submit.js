@@ -1,69 +1,62 @@
 /* =========================================================================
-   Vercel Serverless Function — приём заявок из формы
-   POST /api/submit  { name, phone, comment, source }
-   ---------------------------------------------------------------------------
-   Ф0 (сейчас): валидирует данные и возвращает успех (пишет в лог Vercel).
-   Ф2 (дальше): здесь подключим запись строки в Google-таблицу.
-                Инструкция по подключению — в README.md.
+   Vercel Serverless — приём заявок → Upstash Redis
+   POST /api/submit  { name, phone, comment, consent, adult, ref, source }
+   ENV (Vercel Marketplace → Upstash подставит сам):
+     UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN  (или KV_REST_API_URL / KV_REST_API_TOKEN)
+   Пока переменных нет — заявка пишется в лог, чтобы сайт работал.
    ========================================================================= */
-
 module.exports = async function handler(req, res) {
-  // CORS/же-метод
-  if (req.method !== 'POST') {
-    res.status(405).json({ error: 'Method not allowed' });
-    return;
-  }
+  if (req.method !== 'POST') { res.status(405).json({ error: 'Method not allowed' }); return; }
 
   try {
-    // Тело может прийти строкой — подстрахуемся
     var body = req.body;
-    if (typeof body === 'string') {
-      try { body = JSON.parse(body); } catch (e) { body = {}; }
-    }
+    if (typeof body === 'string') { try { body = JSON.parse(body); } catch (e) { body = {}; } }
     body = body || {};
 
-    var name = String(body.name || '').trim();
-    var phone = String(body.phone || '').trim();
+    // honeypot
+    if (String(body.website || '').trim()) { res.status(200).json({ ok: true }); return; }
+
+    var name = String(body.name || '').trim().slice(0, 200);
+    var phone = String(body.phone || '').trim().slice(0, 30);
     var comment = String(body.comment || '').trim().slice(0, 2000);
     var source = String(body.source || '').trim().slice(0, 500);
+    var ref = String(body.ref || '').trim().slice(0, 40);
     var consent = body.consent === true;
     var adult = body.adult === true;
 
-    // Валидация
     if (!name || phone.replace(/\D/g, '').length < 11) {
       res.status(400).json({ error: 'Проверьте имя и телефон' });
       return;
     }
 
-    var row = {
-      date: new Date().toISOString(),
-      name: name,
-      phone: phone,
-      comment: comment,
-      consent: consent ? 'да' : 'нет',
-      adult: adult ? 'да' : 'нет',
-      source: source
+    var record = {
+      id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+      created_at: new Date().toISOString(),
+      name: name, phone: phone, comment: comment,
+      consent: consent, adult: adult, ref: ref, source: source
     };
+    var refKey = ref || '(без метки)';
 
-    // ─── Ф2: запись в Google Sheets ───────────────────────────────────────
-    // Раскомментируйте после настройки переменных окружения (см. README):
-    //
-    // const { google } = require('googleapis');
-    // const auth = new google.auth.JWT(
-    //   process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL, null,
-    //   (process.env.GOOGLE_PRIVATE_KEY || '').replace(/\\n/g, '\n'),
-    //   ['https://www.googleapis.com/auth/spreadsheets']
-    // );
-    // const sheets = google.sheets({ version: 'v4', auth });
-    // await sheets.spreadsheets.values.append({
-    //   spreadsheetId: process.env.GOOGLE_SHEET_ID,
-    //   range: 'Лист1!A:G',
-    //   valueInputOption: 'USER_ENTERED',
-    //   requestBody: { values: [[row.date, row.name, row.phone, row.comment, row.consent, row.adult, row.source]] }
-    // });
-    // ──────────────────────────────────────────────────────────────────────
+    var URL = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+    var TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
 
-    console.log('Новая заявка:', row);
+    if (URL && TOKEN) {
+      var r = await fetch(URL + '/pipeline', {
+        method: 'POST',
+        headers: { Authorization: 'Bearer ' + TOKEN, 'Content-Type': 'application/json' },
+        body: JSON.stringify([
+          ['LPUSH', 'signatures', JSON.stringify(record)],
+          ['HINCRBY', 'refcounts', refKey, 1]
+        ])
+      });
+      if (!r.ok) {
+        console.error('Upstash write failed:', r.status, await r.text());
+        res.status(502).json({ error: 'Ошибка сохранения' });
+        return;
+      }
+    } else {
+      console.log('Заявка (база не настроена):', record);
+    }
 
     res.status(200).json({ ok: true });
   } catch (err) {
