@@ -1,9 +1,9 @@
 /* =========================================================================
-   Vercel Serverless — приём заявок → Upstash Redis
-   POST /api/submit  { name, phone, comment, consent, adult, ref, source }
-   ENV (Vercel Marketplace → Upstash подставит сам):
-     UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN  (или KV_REST_API_URL / KV_REST_API_TOKEN)
-   Пока переменных нет — заявка пишется в лог, чтобы сайт работал.
+   Vercel Serverless — приём заявок → Upstash Redis + дублирование на почту
+   POST /api/submit { type, name, surname, first_name, patronymic, birthdate,
+                      phone, email, region, city, experience, consent, adult, ref, source }
+   Наблюдатели закрепляются за Рафаэлем Авазовым (ref=avazov).
+   ENV: UPSTASH_REDIS_REST_URL/TOKEN (или KV_*), MAIL_USER, MAIL_PASS, MAIL_TO
    ========================================================================= */
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') { res.status(405).json({ error: 'Method not allowed' }); return; }
@@ -16,11 +16,20 @@ module.exports = async function handler(req, res) {
     // honeypot
     if (String(body.website || '').trim()) { res.status(200).json({ ok: true }); return; }
 
-    var name = String(body.name || '').trim().slice(0, 200);
-    var phone = String(body.phone || '').trim().slice(0, 30);
-    var comment = String(body.comment || '').trim().slice(0, 2000);
-    var source = String(body.source || '').trim().slice(0, 500);
-    var ref = String(body.ref || '').trim().slice(0, 40);
+    var s = function (v, n) { return String(v == null ? '' : v).trim().slice(0, n || 200); };
+    var type = s(body.type, 40) || 'вступить';
+    var name = s(body.name, 200);
+    var surname = s(body.surname, 100);
+    var first_name = s(body.first_name, 100);
+    var patronymic = s(body.patronymic, 100);
+    var birthdate = s(body.birthdate, 20);
+    var phone = s(body.phone, 30);
+    var email = s(body.email, 150);
+    var region = s(body.region, 120);
+    var city = s(body.city, 120);
+    var experience = s(body.experience, 60);
+    var source = s(body.source, 500);
+    var ref = s(body.ref, 40);
     var consent = body.consent === true;
     var adult = body.adult === true;
 
@@ -29,13 +38,17 @@ module.exports = async function handler(req, res) {
       return;
     }
 
+    // Заявки наблюдателей закреплены за Рафаэлем Авазовым
+    if (type === 'наблюдатель') ref = 'avazov';
+    var refKey = ref || '(без метки)';
+
     var record = {
       id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
       created_at: new Date().toISOString(),
-      name: name, phone: phone, comment: comment,
-      consent: consent, adult: adult, ref: ref, source: source
+      type: type, name: name, surname: surname, first_name: first_name, patronymic: patronymic,
+      birthdate: birthdate, phone: phone, email: email, region: region, city: city,
+      experience: experience, consent: consent, adult: adult, ref: ref, source: source
     };
-    var refKey = ref || '(без метки)';
 
     var URL = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
     var TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
@@ -56,6 +69,29 @@ module.exports = async function handler(req, res) {
       }
     } else {
       console.log('Заявка (база не настроена):', record);
+    }
+
+    // Дублируем заявку на почту (ошибки почты не роняют заявку)
+    if (process.env.MAIL_USER && process.env.MAIL_PASS) {
+      try {
+        var nodemailer = require('nodemailer');
+        var tx = nodemailer.createTransport({
+          host: 'smtp.mail.ru', port: 465, secure: true,
+          auth: { user: process.env.MAIL_USER, pass: process.env.MAIL_PASS }
+        });
+        await tx.sendMail({
+          from: 'Заявки с сайта <' + process.env.MAIL_USER + '>',
+          to: process.env.MAIL_TO || process.env.MAIL_USER,
+          subject: 'Новая заявка: ' + type,
+          text: 'Тип: ' + type + '\nФИО: ' + name + '\nДата рождения: ' + (birthdate || '—') +
+                '\nТелефон: ' + phone + '\nE-mail: ' + (email || '—') +
+                '\nРегион: ' + (region || '—') + '\nГород: ' + (city || '—') +
+                (experience ? '\nОпыт наблюдения: ' + experience : '') +
+                '\nРеферал: ' + refKey +
+                '\nСогласие: ' + (consent ? 'да' : 'нет') + ', 18+: ' + (adult ? 'да' : 'нет') +
+                '\nДата: ' + record.created_at + '\nСтраница: ' + source
+        });
+      } catch (mailErr) { console.error('mail error:', mailErr); }
     }
 
     res.status(200).json({ ok: true });

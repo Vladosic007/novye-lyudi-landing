@@ -83,7 +83,7 @@
       </div>
       <div class="scroll">
         <table>
-          <thead><tr><th>Дата</th><th>Имя</th><th>Телефон</th><th>Реф</th></tr></thead>
+          <thead><tr><th>Дата</th><th>Тип</th><th>Имя</th><th>Телефон</th><th>Реф</th></tr></thead>
           <tbody id="recent-body"></tbody>
         </table>
       </div>
@@ -127,8 +127,8 @@
     lastRecent = data.recent || [];
     $('#recent-body').innerHTML = lastRecent.map(function (r) {
       var d = new Date(r.created_at).toLocaleString('ru-RU');
-      return '<tr><td>' + esc(d) + '</td><td>' + esc(r.name) + '</td><td>' + esc(r.phone) + '</td><td>' + esc(r.ref || '—') + '</td></tr>';
-    }).join('') || '<tr><td colspan="4" class="muted">Пока пусто</td></tr>';
+      return '<tr><td>' + esc(d) + '</td><td>' + esc(r.type || '—') + '</td><td>' + esc(r.name) + '</td><td>' + esc(r.phone) + '</td><td>' + esc(r.ref || '—') + '</td></tr>';
+    }).join('') || '<tr><td colspan="5" class="muted">Пока пусто</td></tr>';
   }
 
   function renderLinks() {
@@ -174,9 +174,9 @@
   });
 
   $('#csv').addEventListener('click', function () {
-    var head = 'Дата,Имя,Телефон,Реф,Комментарий\n';
+    var head = 'Дата,Тип,ФИО,Телефон,E-mail,Регион,Город,Реф\n';
     var rows = lastRecent.map(function (r) {
-      return [new Date(r.created_at).toLocaleString('ru-RU'), r.name, r.phone, r.ref || '', (r.comment || '').replace(/\s+/g, ' ')]
+      return [new Date(r.created_at).toLocaleString('ru-RU'), r.type || '', r.name, r.phone, r.email || '', r.region || '', r.city || '', r.ref || '']
         .map(function (v) { return '"' + String(v).replace(/"/g, '""') + '"'; }).join(',');
     }).join('\n');
     var blob = new Blob(['﻿' + head + rows], { type: 'text/csv;charset=utf-8' });

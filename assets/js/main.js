@@ -84,6 +84,17 @@
     phone.addEventListener('blur', function () { if (phone.value === '+7 ' || phone.value === '+7') phone.value = ''; });
   }
 
+  /* --- Табы формы (тип заявки) --- */
+  var typeField = $('#app-type');
+  var expField = $('#field-experience');
+  var formTabs = $$('.form-tab');
+  function setType(t) {
+    if (typeField) typeField.value = t;
+    formTabs.forEach(function (b) { b.classList.toggle('is-active', b.getAttribute('data-type') === t); });
+    if (expField) expField.style.display = (t === 'наблюдатель') ? '' : 'none';
+  }
+  formTabs.forEach(function (b) { b.addEventListener('click', function () { setType(b.getAttribute('data-type')); }); });
+
   /* --- Форма: валидация + отправка --- */
   var form = $('#apply-form');
   if (form) {
@@ -95,6 +106,7 @@
       if (em) em.classList.toggle('show', isErr);
     }
 
+    var val = function (id) { var e = $(id); return e ? e.value.trim() : ''; };
     $$('.input, .textarea', form).forEach(function (el) {
       el.addEventListener('input', function () { mark(el, false); });
     });
@@ -115,10 +127,11 @@
       // honeypot — если заполнен, тихо выходим (это бот)
       if (form.website && form.website.value) return;
 
-      var name = $('#name');
+      var surname = $('#surname'), firstName = $('#first-name');
       var ok = true;
 
-      if (!name.value.trim()) { mark(name, true); ok = false; }
+      if (!surname.value.trim()) { mark(surname, true); ok = false; }
+      if (!firstName.value.trim()) { mark(firstName, true); ok = false; }
       var digits = (phone.value || '').replace(/\D/g, '');
       if (digits.length < 11) { mark(phone, true); ok = false; }
       if (consent && !consent.checked) { if (consentErr) consentErr.classList.add('show'); ok = false; }
@@ -134,9 +147,17 @@
       btn.innerHTML = 'Отправляем…';
 
       var payload = {
-        name: name.value.trim(),
+        type: typeField ? typeField.value : 'вступить',
+        name: [val('#surname'), val('#first-name'), val('#patronymic')].filter(Boolean).join(' '),
+        surname: val('#surname'),
+        first_name: val('#first-name'),
+        patronymic: val('#patronymic'),
+        birthdate: val('#birthdate'),
         phone: phone.value.trim(),
-        comment: (form.comment ? form.comment.value.trim() : ''),
+        email: val('#email'),
+        region: val('#region'),
+        city: val('#city'),
+        experience: val('#experience'),
         consent: !!(consent && consent.checked),
         adult: !!(adult && adult.checked),
         ref: getRef(),
@@ -151,6 +172,7 @@
         .then(function (res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res; })
         .then(function () {
           form.style.display = 'none';
+          var tabs = $('.form-tabs'); if (tabs) tabs.style.display = 'none';
           var success = $('#form-success');
           if (success) success.classList.add('show');
         })
@@ -172,6 +194,19 @@
     var update = function () { mcta.classList.toggle('show', pastHero && !inForm); };
     new IntersectionObserver(function (e) { pastHero = !e[0].isIntersecting; update(); }, { threshold: 0 }).observe(hero);
     if (formSec) new IntersectionObserver(function (e) { inForm = e[0].isIntersecting; update(); }, { threshold: 0.15 }).observe(formSec);
+  }
+
+  /* --- Cookie-баннер --- */
+  var cookie = $('#cookie');
+  if (cookie) {
+    var seen = false;
+    try { seen = !!localStorage.getItem('nl_cookie'); } catch (e) {}
+    if (!seen) cookie.hidden = false;
+    var cok = $('#cookie-ok');
+    if (cok) cok.addEventListener('click', function () {
+      try { localStorage.setItem('nl_cookie', '1'); } catch (e) {}
+      cookie.hidden = true;
+    });
   }
 
   /* --- Год в подвале --- */

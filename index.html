@@ -191,17 +191,16 @@
         </div>
       </div>
 
-      <!-- ✏️ ИЗВЕСТНЫЕ ИНИЦИАТИВЫ. Данные собраны из открытых источников (программный
-           манифест партии, СМИ) — сверься и при необходимости поправь формулировки. -->
+      <!-- ✏️ ИНИЦИАТИВЫ: замени href="https://newpeople.ru" на ссылку статьи по каждой. -->
       <div class="initiatives" data-reveal>
         <h3 class="initiatives__title">Известные инициативы партии</h3>
         <div class="init-grid">
-          <div class="init"><span class="init__tag">Интернет</span><p>Пересмотр всех интернет-блокировок последних пяти лет.</p></div>
-          <div class="init"><span class="init__tag">Интернет</span><p>Доступ к сайтам ограничивать только по решению суда.</p></div>
-          <div class="init"><span class="init__tag">Связь</span><p>Бесплатный Wi-Fi в регионах с проблемами связи.</p></div>
-          <div class="init"><span class="init__tag">Бизнес</span><p>Отсрочка от армии для молодых предпринимателей.</p></div>
-          <div class="init"><span class="init__tag">Молодёжь</span><p>«Первое рабочее место» для студентов.</p></div>
-          <div class="init"><span class="init__tag">Люди</span><p>«Шашлычная амнистия» — готовить на своих участках без штрафов.</p></div>
+          <a class="init" href="https://newpeople.ru" target="_blank" rel="noopener"><span class="init__tag">Интернет</span><p>Пересмотр всех интернет-блокировок последних пяти лет.</p><span class="init__more">Подробнее →</span></a>
+          <a class="init" href="https://newpeople.ru" target="_blank" rel="noopener"><span class="init__tag">Интернет</span><p>Доступ к сайтам ограничивать только по решению суда.</p><span class="init__more">Подробнее →</span></a>
+          <a class="init" href="https://newpeople.ru" target="_blank" rel="noopener"><span class="init__tag">Связь</span><p>Бесплатный Wi-Fi в регионах с проблемами связи.</p><span class="init__more">Подробнее →</span></a>
+          <a class="init" href="https://newpeople.ru" target="_blank" rel="noopener"><span class="init__tag">Бизнес</span><p>Отсрочка от армии для молодых предпринимателей.</p><span class="init__more">Подробнее →</span></a>
+          <a class="init" href="https://newpeople.ru" target="_blank" rel="noopener"><span class="init__tag">Молодёжь</span><p>«Первое рабочее место» для студентов.</p><span class="init__more">Подробнее →</span></a>
+          <a class="init" href="https://newpeople.ru" target="_blank" rel="noopener"><span class="init__tag">Люди</span><p>«Шашлычная амнистия» — готовить на своих участках без штрафов.</p><span class="init__more">Подробнее →</span></a>
         </div>
       </div>
     </div>
@@ -218,117 +217,63 @@
         <p>Местное отделение партии «Новые люди» в Таганроге — люди, которые ведут инициативу за свободный интернет.</p>
       </div>
 
-      <!-- ✏️ КОМАНДА: чтобы добавить человека — скопируй один блок <article class="member">…</article>.
-           Чтобы вставить фото: замени <svg>…</svg> внутри .member__photo на
-           <img src="assets/img/team/имя.jpg" alt="Имя Фамилия" /> -->
-      <div class="team-grid">
-        <!-- 1. Владимир Кабицкий -->
-        <article class="member" data-reveal data-reveal-delay="1">
-          <div class="member__photo">
-            <img src="assets/img/team/kabitsky.jpg" alt="Владимир Кабицкий" onerror="this.style.display='none'" />
-            <span class="member__initials">ВК</span>
-          </div>
-          <div class="member__body">
-            <h3>Владимир Кабицкий</h3>
-            <div class="member__role">Председатель местного отделения</div>
-          </div>
-        </article>
+      <!-- ✏️ ДЕРЕВО КОМАНДЫ. Фото: assets/img/team/<код>.jpg (sheyning, kabitsky,
+           shesterikov, lysakov, mikhaelyan, safronov, avazov, kamensky, demidenko).
+           Пока файла нет — показываются инициалы. -->
+      <div class="tree" data-reveal>
 
-        <!-- 2. Алексей Шестериков -->
-        <article class="member" data-reveal data-reveal-delay="2">
-          <div class="member__photo">
-            <img src="assets/img/team/shesterikov.jpg" alt="Алексей Шестериков" onerror="this.style.display='none'" />
-            <span class="member__initials">АШ</span>
+        <!-- Уровень 1 -->
+        <div class="tier">
+          <div class="node node--lead">
+            <span class="node__ava"><img src="assets/img/team/sheyning.jpg" alt="Антон Шенинг" onerror="this.style.display='none'" /><i>АШ</i></span>
+            <span class="node__info"><b>Антон Шенинг</b><span>Куратор местного отделения</span></span>
           </div>
-          <div class="member__body">
-            <h3>Алексей Шестериков</h3>
-            <div class="member__role">Депутат города Таганрога</div>
-          </div>
-        </article>
+        </div>
 
-        <!-- 3. Евгений Лысаков -->
-        <article class="member" data-reveal data-reveal-delay="3">
-          <div class="member__photo">
-            <img src="assets/img/team/lysakov.jpg" alt="Евгений Лысаков" onerror="this.style.display='none'" />
-            <span class="member__initials">ЕЛ</span>
-          </div>
-          <div class="member__body">
-            <h3>Евгений Лысаков</h3>
-            <div class="member__role">Секретарь местного отделения</div>
-          </div>
-        </article>
+        <div class="connector"></div>
 
-        <!-- 4. Рафаэль Авазов -->
-        <article class="member" data-reveal data-reveal-delay="1">
-          <div class="member__photo">
-            <img src="assets/img/team/avazov.jpg" alt="Рафаэль Авазов" onerror="this.style.display='none'" />
-            <span class="member__initials">РА</span>
+        <!-- Уровень 2 -->
+        <div class="tier">
+          <div class="node">
+            <span class="node__ava"><img src="assets/img/team/kabitsky.jpg" alt="Владимир Кабицкий" onerror="this.style.display='none'" /><i>ВК</i></span>
+            <span class="node__info"><b>Владимир Кабицкий</b><span>Председатель местного отделения</span></span>
           </div>
-          <div class="member__body">
-            <h3>Рафаэль Авазов</h3>
-            <div class="member__role">Координатор руководителей первичных отделений</div>
+          <div class="node">
+            <span class="node__ava"><img src="assets/img/team/shesterikov.jpg" alt="Алексей Шестериков" onerror="this.style.display='none'" /><i>АШ</i></span>
+            <span class="node__info"><b>Алексей Шестериков</b><span>Депутат города Таганрога</span></span>
           </div>
-        </article>
+          <div class="node">
+            <span class="node__ava"><img src="assets/img/team/lysakov.jpg" alt="Евгений Лысаков" onerror="this.style.display='none'" /><i>ЕЛ</i></span>
+            <span class="node__info"><b>Евгений Лысаков</b><span>Секретарь местного отделения</span></span>
+          </div>
+        </div>
 
-        <!-- 5. Артем Михаелян -->
-        <article class="member" data-reveal data-reveal-delay="2">
-          <div class="member__photo">
-            <img src="assets/img/team/mikhaelyan.jpg" alt="Артем Михаелян" onerror="this.style.display='none'" />
-            <span class="member__initials">АМ</span>
-          </div>
-          <div class="member__body">
-            <h3>Артем Михаелян</h3>
-            <div class="member__role">Координатор руководителей первичных отделений</div>
-          </div>
-        </article>
+        <div class="connector"></div>
 
-        <!-- 6. Артем Сафронов -->
-        <article class="member" data-reveal data-reveal-delay="3">
-          <div class="member__photo">
-            <img src="assets/img/team/safronov.jpg" alt="Артем Сафронов" onerror="this.style.display='none'" />
-            <span class="member__initials">АС</span>
+        <!-- Уровень 3 -->
+        <div class="tier">
+          <div class="node">
+            <span class="node__ava"><img src="assets/img/team/mikhaelyan.jpg" alt="Артем Михаелян" onerror="this.style.display='none'" /><i>АМ</i></span>
+            <span class="node__info"><b>Артем Михаелян</b><span>Координатор первичных отделений</span></span>
           </div>
-          <div class="member__body">
-            <h3>Артем Сафронов</h3>
-            <div class="member__role">Руководитель штаба</div>
+          <div class="node">
+            <span class="node__ava"><img src="assets/img/team/safronov.jpg" alt="Артем Сафронов" onerror="this.style.display='none'" /><i>АС</i></span>
+            <span class="node__info"><b>Артем Сафронов</b><span>Руководитель штаба</span></span>
           </div>
-        </article>
+          <div class="node">
+            <span class="node__ava"><img src="assets/img/team/avazov.jpg" alt="Рафаэль Авазов" onerror="this.style.display='none'" /><i>РА</i></span>
+            <span class="node__info"><b>Рафаэль Авазов</b><span>Координатор первичных отделений</span></span>
+          </div>
+          <div class="node">
+            <span class="node__ava"><img src="assets/img/team/kamensky.jpg" alt="Владислав Каменский" onerror="this.style.display='none'" /><i>ВК</i></span>
+            <span class="node__info"><b>Владислав Каменский</b><span>Технический специалист</span></span>
+          </div>
+          <div class="node">
+            <span class="node__ava"><img src="assets/img/team/demidenko.jpg" alt="Дмитрий Демиденко" onerror="this.style.display='none'" /><i>ДД</i></span>
+            <span class="node__info"><b>Дмитрий Демиденко</b><span>Руководитель медийного отделения</span></span>
+          </div>
+        </div>
 
-        <!-- 7. Дмитрий Демиденко -->
-        <article class="member" data-reveal data-reveal-delay="1">
-          <div class="member__photo">
-            <img src="assets/img/team/demidenko.jpg" alt="Дмитрий Демиденко" onerror="this.style.display='none'" />
-            <span class="member__initials">ДД</span>
-          </div>
-          <div class="member__body">
-            <h3>Дмитрий Демиденко</h3>
-            <div class="member__role">Руководитель медийного отделения</div>
-          </div>
-        </article>
-
-        <!-- 8. Владислав Каменский -->
-        <article class="member" data-reveal data-reveal-delay="2">
-          <div class="member__photo">
-            <img src="assets/img/team/kamensky.jpg" alt="Владислав Каменский" onerror="this.style.display='none'" />
-            <span class="member__initials">ВК</span>
-          </div>
-          <div class="member__body">
-            <h3>Владислав Каменский</h3>
-            <div class="member__role">Технический специалист</div>
-          </div>
-        </article>
-
-        <!-- 9. Антон Шенинг -->
-        <article class="member" data-reveal data-reveal-delay="3">
-          <div class="member__photo">
-            <img src="assets/img/team/sheyning.jpg" alt="Антон Шенинг" onerror="this.style.display='none'" />
-            <span class="member__initials">АШ</span>
-          </div>
-          <div class="member__body">
-            <h3>Антон Шенинг</h3>
-            <div class="member__role">Куратор местного отделения</div>
-          </div>
-        </article>
       </div>
     </div>
   </section>
@@ -339,10 +284,10 @@
     <div class="container">
       <div class="apply-grid">
         <div class="apply__aside" data-reveal>
-          <span class="eyebrow">Подпись</span>
+          <span class="eyebrow">Заявка</span>
           <!-- ✏️ ТЕКСТ: заголовок и текст рядом с формой -->
-          <h2>Поддержите свободный интернет</h2>
-          <p>Оставьте контакты — мы свяжемся и расскажем, как принять участие в инициативе.</p>
+          <h2>Присоединяйтесь к партии</h2>
+          <p>Присоединяйтесь к самой яркой политической силе в России! Мы&nbsp;партия «Новые люди».</p>
           <ul class="apply__points">
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
@@ -360,48 +305,63 @@
         </div>
 
         <div class="form-card" data-reveal data-reveal-delay="1">
+          <!-- Вкладки: тип заявки -->
+          <div class="form-tabs" role="tablist">
+            <button type="button" class="form-tab is-active" data-type="вступить">Вступить в&nbsp;партию</button>
+            <button type="button" class="form-tab" data-type="депутат">Стать депутатом</button>
+            <button type="button" class="form-tab" data-type="наблюдатель">Стать наблюдателем</button>
+          </div>
+
           <form id="apply-form" action="/api/submit" method="post" novalidate>
+            <input type="hidden" name="type" id="app-type" value="вступить" />
             <!-- honeypot против спам-ботов (не трогать) -->
             <div class="hp" aria-hidden="true"><label>Не заполняйте<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
 
-            <div class="field">
-              <label for="name">Имя <span class="req">*</span></label>
-              <input class="input" type="text" id="name" name="name" placeholder="Как к вам обращаться" autocomplete="name" />
-              <div class="err-msg">Пожалуйста, укажите имя</div>
+            <div class="form-row-2">
+              <div class="field"><input class="input" id="region" name="region" placeholder="Регион (по прописке)" /></div>
+              <div class="field"><input class="input" id="city" name="city" placeholder="Город" /></div>
             </div>
 
-            <div class="field">
-              <label for="phone">Телефон <span class="req">*</span></label>
-              <input class="input" type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel" inputmode="tel" />
-              <div class="err-msg">Введите корректный номер телефона</div>
+            <div class="form-row-3">
+              <div class="field"><input class="input" id="surname" name="surname" placeholder="Фамилия" autocomplete="family-name" /><div class="err-msg">Укажите фамилию</div></div>
+              <div class="field"><input class="input" id="first-name" name="first_name" placeholder="Имя" autocomplete="given-name" /><div class="err-msg">Укажите имя</div></div>
+              <div class="field"><input class="input" id="patronymic" name="patronymic" placeholder="Отчество" /></div>
             </div>
 
-            <div class="field">
-              <label for="comment">Комментарий</label>
-              <textarea class="textarea" id="comment" name="comment" placeholder="Ваше сообщение (необязательно)"></textarea>
+            <div class="form-row-3">
+              <div class="field"><input class="input" id="birthdate" name="birthdate" type="date" aria-label="Дата рождения" /></div>
+              <div class="field"><input class="input" id="phone" name="phone" type="tel" placeholder="+7 (___) ___-__-__" inputmode="tel" autocomplete="tel" /><div class="err-msg">Введите корректный номер телефона</div></div>
+              <div class="field"><input class="input" id="email" name="email" type="email" placeholder="E-mail" autocomplete="email" /></div>
+            </div>
+
+            <!-- Поле только для вкладки «Наблюдатель» -->
+            <div class="field" id="field-experience" style="display:none">
+              <select class="input" id="experience" name="experience">
+                <option value="">Опыт наблюдения</option>
+                <option value="Есть опыт">Есть опыт наблюдения</option>
+                <option value="Нет опыта">Нет опыта</option>
+              </select>
             </div>
 
             <div class="field">
               <label class="checkbox">
                 <input type="checkbox" name="consent" id="consent" />
-                <!-- ✏️ ТЕКСТ: согласие на обработку данных -->
-                <span>Я согласен(на) на обработку персональных данных в соответствии с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a>.</span>
+                <span>Я даю согласие на обработку персональных данных в соответствии с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a>.</span>
               </label>
               <div class="err-msg" id="consent-err">Нужно согласие на обработку данных</div>
             </div>
 
-            <!-- ✏️ Подтверждение 18+ -->
             <div class="field">
               <label class="checkbox">
                 <input type="checkbox" name="adult" id="adult" />
-                <span>Мне есть 18 лет, и я осознанно оставляю подпись.</span>
+                <span>Мне есть 18 лет.</span>
               </label>
               <div class="err-msg" id="adult-err">Подтвердите, что вам есть 18 лет</div>
             </div>
 
             <div class="err-msg" id="form-global-err" style="margin-bottom:14px">Не удалось отправить. Попробуйте ещё раз или напишите нам напрямую.</div>
 
-            <button type="submit" class="btn btn--primary btn--lg btn--block" id="submit-btn">Отправить подпись</button>
+            <button type="submit" class="btn btn--primary btn--lg btn--block" id="submit-btn">Отправить заявку</button>
           </form>
 
           <!-- Экран «Спасибо» -->
@@ -409,7 +369,7 @@
             <span class="ok">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
             </span>
-            <h3>Спасибо, подпись принята!</h3>
+            <h3>Спасибо, заявка принята!</h3>
             <p>Мы свяжемся с вами в ближайшее время.</p>
           </div>
         </div>
@@ -445,9 +405,11 @@
 
       <div class="footer__contacts">
         <h4>Контакты</h4>
-        <!-- ✏️ ТЕКСТ: почта и телефон -->
+        <!-- ✏️ ТЕКСТ: адрес, почта и телефон -->
+        <p>г. Таганрог, Лесная Биржа, 6В</p>
         <p><a href="mailto:partia_new@mail.ru">partia_new@mail.ru</a></p>
         <p><a href="tel:+79283575785">+7 (928) 357-57-85</a></p>
+        <p><a href="https://yandex.ru/maps/?text=Таганрог,%20Лесная%20Биржа%206В" target="_blank" rel="noopener">Открыть на Яндекс.Картах →</a></p>
       </div>
     </div>
 
@@ -457,6 +419,12 @@
     </div>
   </div>
 </footer>
+
+<!-- Cookie-баннер -->
+<div class="cookie" id="cookie" hidden>
+  <p>Мы используем файлы cookie, чтобы сайт работал корректно. Оставаясь здесь, вы соглашаетесь с <a href="privacy.html">политикой конфиденциальности</a>.</p>
+  <button class="btn btn--primary" id="cookie-ok">Принять</button>
+</div>
 
 <!-- Липкая кнопка на мобильных -->
 <div class="mobile-cta">
