@@ -69,7 +69,7 @@
         </p>
         <div class="hero__cta" data-reveal data-reveal-delay="3">
           <a href="#zayavka" class="btn btn--primary btn--lg">Оставить подпись</a>
-          <a href="#o-partii" class="btn btn--ghost btn--lg">Узнать о партии</a>
+          <button type="button" class="btn btn--ghost btn--lg" data-observer-open>Стать наблюдателем</button>
         </div>
       </div>
 
@@ -159,7 +159,10 @@
             Одна из ключевых тем партии — свободный интернет: пересмотр блокировок
             и защита цифровых прав граждан.
           </p>
-          <a href="#zayavka" class="btn btn--primary">Поддержать инициативу</a>
+          <div class="party__cta">
+            <a href="#zayavka" class="btn btn--primary">Поддержать инициативу</a>
+            <button type="button" class="btn btn--ghost" data-observer-open>Стать наблюдателем</button>
+          </div>
         </div>
 
         <!-- ✏️ ТЕКСТ: тезисы (можно менять заголовки и описания) -->
@@ -344,13 +347,13 @@
 
             <div class="err-msg" id="form-global-err" style="margin-bottom:14px">Не удалось отправить. Попробуйте ещё раз или напишите нам напрямую.</div>
 
-            <button type="submit" class="btn btn--primary btn--lg btn--block" id="submit-btn">Отправить подпись</button>
+            <button type="submit" class="btn btn--primary btn--lg btn--block btn--glow" id="submit-btn">Отправить подпись</button>
           </form>
 
           <!-- Отдельная кнопка для наблюдателей — открывает всплывающее окно -->
           <div class="form-alt">
             <span>Хотите наблюдать за выборами?</span>
-            <button type="button" class="btn btn--ghost btn--block" data-observer-open>Стать наблюдателем</button>
+            <button type="button" class="btn btn--ghost btn--lg btn--block" data-observer-open>Стать наблюдателем</button>
           </div>
 
           <!-- Экран «Спасибо» -->
