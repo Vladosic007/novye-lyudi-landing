@@ -314,6 +314,7 @@ select.input{appearance:none;-webkit-appearance:none;background-image:url("data:
 .cookie p{flex:1;min-width:220px;margin:0;font-size:14px;color:var(--muted);line-height:1.5}
 .cookie a{color:var(--cta);text-decoration:underline;text-underline-offset:2px}
 .cookie .btn{padding:10px 20px;font-size:14px;flex:none}
+.cookie[hidden]{display:none}
 @media (max-width:860px){.cookie{bottom:84px}}
 
 /* Кнопка-«или» под формой */

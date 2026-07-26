@@ -59,7 +59,7 @@
       <h2>По рефералам</h2>
       <div class="scroll">
         <table>
-          <thead><tr><th>Реферал</th><th class="num">Подписей</th></tr></thead>
+          <thead><tr><th>Реферал</th><th class="num">Подписей</th><th>Таблица</th></tr></thead>
           <tbody id="ref-body"></tbody>
         </table>
       </div>
@@ -120,9 +120,11 @@
 
   function render(data) {
     $('#total').textContent = data.total;
+    var sheetUrl = data.sheetUrl || '';
     $('#ref-body').innerHTML = data.byRef.map(function (x) {
-      return '<tr><td><span class="tag">' + esc(x.ref) + '</span></td><td class="num">' + x.count + '</td></tr>';
-    }).join('') || '<tr><td colspan="2" class="muted">Пока пусто</td></tr>';
+      var lnk = sheetUrl ? '<a href="' + esc(sheetUrl) + '?ref=' + encodeURIComponent(x.ref) + '" target="_blank" rel="noopener">Открыть →</a>' : '—';
+      return '<tr><td><span class="tag">' + esc(x.ref) + '</span></td><td class="num">' + x.count + '</td><td>' + lnk + '</td></tr>';
+    }).join('') || '<tr><td colspan="3" class="muted">Пока пусто</td></tr>';
 
     lastRecent = data.recent || [];
     $('#recent-body').innerHTML = lastRecent.map(function (r) {

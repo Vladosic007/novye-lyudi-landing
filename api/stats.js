@@ -44,7 +44,7 @@ module.exports = async function handler(req, res) {
     for (var i = 0; i < hg.length; i += 2) byRef.push({ ref: hg[i], count: Number(hg[i + 1]) });
     byRef.sort(function (a, b) { return b.count - a.count; });
 
-    res.status(200).json({ total: total, byRef: byRef, recent: recent });
+    res.status(200).json({ total: total, byRef: byRef, recent: recent, sheetUrl: process.env.GOOGLE_SCRIPT_URL || '' });
   } catch (err) {
     console.error('stats error:', err);
     res.status(500).json({ error: 'Server error' });

@@ -100,6 +100,15 @@ module.exports = async function handler(req, res) {
       } catch (mailErr) { console.error('mail error:', mailErr); }
     }
 
+    // Дублируем в Google-таблицу через Apps Script (отдельный лист на каждого реферала)
+    if (process.env.GOOGLE_SCRIPT_URL) {
+      try {
+        await fetch(process.env.GOOGLE_SCRIPT_URL, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(record)
+        });
+      } catch (gErr) { console.error('sheets error:', gErr); }
+    }
+
     res.status(200).json({ ok: true });
   } catch (err) {
     console.error('submit error:', err);
