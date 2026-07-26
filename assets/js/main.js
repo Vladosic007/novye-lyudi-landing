@@ -54,6 +54,7 @@
   /* --- Маска телефона для всех полей type=tel --- */
   function formatPhone(value) {
     var d = value.replace(/\D/g, '');
+    if (!d) return '';                 // пустое поле остаётся пустым (можно стереть)
     if (d.charAt(0) === '8') d = '7' + d.slice(1);
     if (d.charAt(0) !== '7') d = '7' + d;
     d = d.slice(0, 11);
@@ -66,9 +67,12 @@
     return out;
   }
   $$('input[type="tel"]').forEach(function (ph) {
-    ph.addEventListener('input', function () { ph.value = formatPhone(ph.value); });
-    ph.addEventListener('focus', function () { if (!ph.value) ph.value = '+7 '; });
-    ph.addEventListener('blur', function () { if (ph.value === '+7 ' || ph.value === '+7') ph.value = ''; });
+    ph.addEventListener('input', function () {
+      // не мешаем стиранию: если пользователь удаляет — просто чистим лишние символы
+      var atEnd = ph.selectionStart === ph.value.length;
+      ph.value = formatPhone(ph.value);
+      if (atEnd) { try { ph.setSelectionRange(ph.value.length, ph.value.length); } catch (e) {} }
+    });
   });
 
   /* --- Общий помощник ошибок --- */
@@ -79,6 +83,13 @@
     if (em) em.classList.toggle('show', isErr);
   }
   function digits(v) { return (v || '').replace(/\D/g, ''); }
+  function ageFromDate(str) {
+    if (!str) return null;
+    var b = new Date(str); if (isNaN(b.getTime())) return null;
+    var t = new Date(), a = t.getFullYear() - b.getFullYear(), m = t.getMonth() - b.getMonth();
+    if (m < 0 || (m === 0 && t.getDate() < b.getDate())) a--;
+    return a;
+  }
 
   /* --- Основная форма: ПОДПИСЬ --- */
   var form = $('#apply-form');
@@ -147,6 +158,8 @@
       if (!oSurname.value.trim()) { markField(oSurname, true); ok = false; }
       if (!oFirst.value.trim()) { markField(oFirst, true); ok = false; }
       if (digits(oPhone.value).length < 11) { markField(oPhone, true); ok = false; }
+      var oBirth = $('#obs-birthdate'), oAge = ageFromDate(oBirth.value);
+      if (oAge === null || oAge < 18) { markField(oBirth, true); ok = false; }
       if (oConsent && !oConsent.checked) { if (oConsentErr) oConsentErr.classList.add('show'); ok = false; }
       if (oAdult && !oAdult.checked) { if (oAdultErr) oAdultErr.classList.add('show'); ok = false; }
       if (!ok) return;
