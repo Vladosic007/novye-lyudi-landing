@@ -182,6 +182,19 @@
     });
   }
 
+  /* --- Видео в hero: автозапуск без звука + кнопка включения звука --- */
+  var hv = $('#hero-video'), sb = $('#video-sound');
+  if (hv && sb) {
+    hv.muted = true;
+    var pr = hv.play(); if (pr && pr.catch) pr.catch(function () {});
+    sb.addEventListener('click', function () {
+      hv.muted = !hv.muted;
+      sb.classList.toggle('is-on', !hv.muted);
+      sb.setAttribute('aria-label', hv.muted ? 'Включить звук' : 'Выключить звук');
+      if (!hv.muted) { var q = hv.play(); if (q && q.catch) q.catch(function () {}); }
+    });
+  }
+
   /* --- Cookie-баннер --- */
   var cookie = $('#cookie');
   if (cookie) {

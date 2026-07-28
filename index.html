@@ -73,28 +73,19 @@
         </div>
       </div>
 
-      <!-- ВИДЕО. Когда будет файл — положи его в assets/video/hero.mp4 и постер в
-           assets/img/hero-poster.jpg, затем раскомментируй блок <video> и удали
-           блок <div class="video-placeholder"> -->
+      <!-- ✏️ ВИДЕО: положи файл в assets/video/hero.mp4 (постер по желанию —
+           assets/img/hero-poster.jpg). Больше ничего менять не нужно. -->
       <div class="video-wrap" data-reveal data-reveal-delay="2">
         <div class="video-glow"></div>
-        <div class="video-frame" id="video-frame">
-
-          <!-- ↓↓↓ РЕАЛЬНОЕ ВИДЕО (пока закомментировано) ↓↓↓
-          <video controls playsinline preload="none" poster="assets/img/hero-poster.jpg">
+        <div class="video-frame">
+          <video id="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/img/hero-poster.jpg">
             <source src="assets/video/hero.mp4" type="video/mp4" />
             Ваш браузер не поддерживает видео.
           </video>
-          ↑↑↑ -->
-
-          <!-- Заглушка (удали, когда добавишь видео) -->
-          <div class="video-placeholder">
-            <span class="play">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            </span>
-            <span>Здесь будет видео — добавим файл&nbsp;hero.mp4</span>
-          </div>
-
+          <button class="video-sound" id="video-sound" type="button" aria-label="Включить звук">
+            <svg class="ic-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+            <svg class="ic-unmuted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+          </button>
         </div>
       </div>
 
